@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+<package name="user" namespace="/user" extends="json-default">
+    <action name="user" class="userAction" method="queryAllUser">        
+        <result name="success" type="json">
+			<!-- resultObj是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <!-- 非root会报错 -->
+          	<!-- 返回数据Map转为Json成功率高 -->
+            <param name="root">dataMap</param>
+        </result> 
+    </action>
+    <action name="myuser" class="userAction" method="query">        
+        <result name="success" type="json">
+			<!-- resultObj是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+            <param name="root">dataMap</param>
+        </result> 
+    </action>
+</package>
+
+</struts>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.ssm.dao.TelMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.ssm.pojo.Tel" >
+    <id column="tel_id" property="telId" jdbcType="VARCHAR" />
+    <result column="tm_id" property="tmId" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="cancel_date" property="cancelDate" jdbcType="TIMESTAMP" />
+    <result column="tc_id" property="tcId" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="REAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tel_id, tm_id, create_date, cancel_date, tc_id, balance, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cn.ssm.pojo.TelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tel
+    where tel_id = #{telId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tel
+    where tel_id = #{telId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cn.ssm.pojo.TelExample" >
+    delete from tel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cn.ssm.pojo.Tel" >
+    insert into tel (tel_id, tm_id, create_date, 
+      cancel_date, tc_id, balance, 
+      state)
+    values (#{telId,jdbcType=VARCHAR}, #{tmId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{cancelDate,jdbcType=TIMESTAMP}, #{tcId,jdbcType=VARCHAR}, #{balance,jdbcType=REAL}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.ssm.pojo.Tel" >
+    insert into tel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="telId != null" >
+        tel_id,
+      </if>
+      <if test="tmId != null" >
+        tm_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="cancelDate != null" >
+        cancel_date,
+      </if>
+      <if test="tcId != null" >
+        tc_id,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="telId != null" >
+        #{telId,jdbcType=VARCHAR},
+      </if>
+      <if test="tmId != null" >
+        #{tmId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelDate != null" >
+        #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tcId != null" >
+        #{tcId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cn.ssm.pojo.TelExample" resultType="java.lang.Integer" >
+    select count(*) from tel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tel
+    <set >
+      <if test="record.telId != null" >
+        tel_id = #{record.telId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmId != null" >
+        tm_id = #{record.tmId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cancelDate != null" >
+        cancel_date = #{record.cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tcId != null" >
+        tc_id = #{record.tcId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=REAL},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tel
+    set tel_id = #{record.telId,jdbcType=VARCHAR},
+      tm_id = #{record.tmId,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      cancel_date = #{record.cancelDate,jdbcType=TIMESTAMP},
+      tc_id = #{record.tcId,jdbcType=VARCHAR},
+      balance = #{record.balance,jdbcType=REAL},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.ssm.pojo.Tel" >
+    update tel
+    <set >
+      <if test="tmId != null" >
+        tm_id = #{tmId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelDate != null" >
+        cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tcId != null" >
+        tc_id = #{tcId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tel_id = #{telId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.ssm.pojo.Tel" >
+    update tel
+    set tm_id = #{tmId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      cancel_date = #{cancelDate,jdbcType=TIMESTAMP},
+      tc_id = #{tcId,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=REAL},
+      state = #{state,jdbcType=INTEGER}
+    where tel_id = #{telId,jdbcType=VARCHAR}
+  </update>
+</mapper>

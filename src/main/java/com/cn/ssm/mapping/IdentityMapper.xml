@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.ssm.dao.IdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.ssm.pojo.Identity" >
+    <id column="tm_id" property="tmId" jdbcType="VARCHAR" />
+    <result column="identity_id" property="identityId" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tm_id, identity_id, sex, level, address, tel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cn.ssm.pojo.IdentityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from identity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from identity
+    where tm_id = #{tmId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from identity
+    where tm_id = #{tmId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cn.ssm.pojo.IdentityExample" >
+    delete from identity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cn.ssm.pojo.Identity" >
+    insert into identity (tm_id, identity_id, sex, 
+      level, address, tel
+      )
+    values (#{tmId,jdbcType=VARCHAR}, #{identityId,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.ssm.pojo.Identity" >
+    insert into identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tmId != null" >
+        tm_id,
+      </if>
+      <if test="identityId != null" >
+        identity_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tmId != null" >
+        #{tmId,jdbcType=VARCHAR},
+      </if>
+      <if test="identityId != null" >
+        #{identityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cn.ssm.pojo.IdentityExample" resultType="java.lang.Integer" >
+    select count(*) from identity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update identity
+    <set >
+      <if test="record.tmId != null" >
+        tm_id = #{record.tmId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identityId != null" >
+        identity_id = #{record.identityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update identity
+    set tm_id = #{record.tmId,jdbcType=VARCHAR},
+      identity_id = #{record.identityId,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.ssm.pojo.Identity" >
+    update identity
+    <set >
+      <if test="identityId != null" >
+        identity_id = #{identityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tm_id = #{tmId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.ssm.pojo.Identity" >
+    update identity
+    set identity_id = #{identityId,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR}
+    where tm_id = #{tmId,jdbcType=VARCHAR}
+  </update>
+</mapper>

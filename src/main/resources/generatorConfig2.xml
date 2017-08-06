@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>  
+	<!-- 配置mysql的驱动路径 -->
+    <classPathEntry  location="C:\MyProgram\mavenrepository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>  
+    <context id="mycontext"  targetRuntime="MyBatis3">  
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/tmdb" userId="ssm" password="123456">  
+        </jdbcConnection>  
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+        <!-- 实体类 -->
+        <javaModelGenerator targetPackage="com.cn.ssm.pojo" targetProject="MybatisSpringStrut2\src\main\java">  
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>  
+        <!-- mybatis 的mapping.xml文件 -->
+        <sqlMapGenerator targetPackage="com.cn.ssm.mapping" targetProject="MybatisSpringStrut2\src\main\java">  
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <!-- 接口  -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cn.ssm.dao" targetProject="MybatisSpringStrut2\src\main\java">  
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>                                          
+        
+        <table tableName="automatpayment" domainObjectName="AutomatPayment" />
+        <table tableName="calllog" domainObjectName="CallLog" />
+        <table tableName="dataflow" domainObjectName="DataFlow" />
+        <table tableName="identity" domainObjectName="Identity" />
+        <table tableName="package" domainObjectName="PackageABC" />
+        <table tableName="payrecords" domainObjectName="PayRecord" />
+        <table tableName="service" domainObjectName="ServiceRecord" />
+        <table tableName="employee" domainObjectName="Employee" />
+        <table tableName="tel" domainObjectName="Tel" />
+        <table tableName="tmdepartment" domainObjectName="Department" />
+
+    </context>  
+</generatorConfiguration>  

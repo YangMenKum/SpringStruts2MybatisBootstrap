@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.ssm.dao.ServiceRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.ssm.pojo.ServiceRecord" >
+    <id column="service_id" property="serviceId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="deal_time" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="service_staff" property="serviceStaff" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    service_id, type, deal_time, service_staff, detail
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cn.ssm.pojo.ServiceRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from service
+    where service_id = #{serviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from service
+    where service_id = #{serviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cn.ssm.pojo.ServiceRecordExample" >
+    delete from service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cn.ssm.pojo.ServiceRecord" >
+    insert into service (service_id, type, deal_time, 
+      service_staff, detail)
+    values (#{serviceId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{dealTime,jdbcType=TIMESTAMP}, 
+      #{serviceStaff,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.ssm.pojo.ServiceRecord" >
+    insert into service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        service_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="dealTime != null" >
+        deal_time,
+      </if>
+      <if test="serviceStaff != null" >
+        service_staff,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceStaff != null" >
+        #{serviceStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cn.ssm.pojo.ServiceRecordExample" resultType="java.lang.Integer" >
+    select count(*) from service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update service
+    <set >
+      <if test="record.serviceId != null" >
+        service_id = #{record.serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealTime != null" >
+        deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceStaff != null" >
+        service_staff = #{record.serviceStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detail != null" >
+        detail = #{record.detail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update service
+    set service_id = #{record.serviceId,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      service_staff = #{record.serviceStaff,jdbcType=VARCHAR},
+      detail = #{record.detail,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.ssm.pojo.ServiceRecord" >
+    update service
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceStaff != null" >
+        service_staff = #{serviceStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where service_id = #{serviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.ssm.pojo.ServiceRecord" >
+    update service
+    set type = #{type,jdbcType=INTEGER},
+      deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      service_staff = #{serviceStaff,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR}
+    where service_id = #{serviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.ssm.dao.PayRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.ssm.pojo.PayRecord" >
+    <id column="payrec_id" property="payrecId" jdbcType="VARCHAR" />
+    <result column="tel_id" property="telId" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    payrec_id, tel_id, money, paytime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cn.ssm.pojo.PayRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from payrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from payrecords
+    where payrec_id = #{payrecId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from payrecords
+    where payrec_id = #{payrecId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cn.ssm.pojo.PayRecordExample" >
+    delete from payrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cn.ssm.pojo.PayRecord" >
+    insert into payrecords (payrec_id, tel_id, money, 
+      paytime)
+    values (#{payrecId,jdbcType=VARCHAR}, #{telId,jdbcType=VARCHAR}, #{money,jdbcType=REAL}, 
+      #{paytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.ssm.pojo.PayRecord" >
+    insert into payrecords
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payrecId != null" >
+        payrec_id,
+      </if>
+      <if test="telId != null" >
+        tel_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="paytime != null" >
+        paytime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payrecId != null" >
+        #{payrecId,jdbcType=VARCHAR},
+      </if>
+      <if test="telId != null" >
+        #{telId,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cn.ssm.pojo.PayRecordExample" resultType="java.lang.Integer" >
+    select count(*) from payrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update payrecords
+    <set >
+      <if test="record.payrecId != null" >
+        payrec_id = #{record.payrecId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telId != null" >
+        tel_id = #{record.telId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=REAL},
+      </if>
+      <if test="record.paytime != null" >
+        paytime = #{record.paytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update payrecords
+    set payrec_id = #{record.payrecId,jdbcType=VARCHAR},
+      tel_id = #{record.telId,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=REAL},
+      paytime = #{record.paytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.ssm.pojo.PayRecord" >
+    update payrecords
+    <set >
+      <if test="telId != null" >
+        tel_id = #{telId,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="paytime != null" >
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where payrec_id = #{payrecId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.ssm.pojo.PayRecord" >
+    update payrecords
+    set tel_id = #{telId,jdbcType=VARCHAR},
+      money = #{money,jdbcType=REAL},
+      paytime = #{paytime,jdbcType=TIMESTAMP}
+    where payrec_id = #{payrecId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,195 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>MybatisSpringStrut2</groupId>
+  <artifactId>MybatisSpringStrut2</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>MybatisSpringStrut2</name>
+  <description/>
+  <!-- 这里的版本都是经过处理jar冲突问题确认的可用版本-->
+  
+    <properties>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <struts.version>2.1.6</struts.version>
+        <spring.version>3.2.3.RELEASE</spring.version>
+        <mybatis.version>3.3.0</mybatis.version>
+        <log4j.version>1.2.17</log4j.version>
+    </properties>
+ 
+ 
+    <dependencies>
+    
+        <!-- struts包 -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+   		<!-- struts2零配置依赖 -->  
+		<dependency>
+		    <groupId>org.apache.struts</groupId>
+		    <artifactId>struts2-convention-plugin</artifactId>
+		    <version>${struts.version}</version>
+		</dependency>
+   		<!-- struts2的json依赖 -->  
+		<dependency>
+		    <groupId>org.apache.struts</groupId>
+		    <artifactId>struts2-json-plugin</artifactId>
+		    <version>2.1.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.struts.xwork/xwork-core -->
+		<dependency>
+		    <groupId>org.apache.struts.xwork</groupId>
+		    <artifactId>xwork-core</artifactId>
+		    <version>2.1.6</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-core</artifactId>
+		    <version>3.2.3.RELEASE</version>
+		</dependency>
+		
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-beans</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-web</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+        <!-- mybatis核心包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <!-- mybatis-spring包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+        <!-- java ee 包 -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+        </dependency>
+        
+        <!-- Mysql数据库链接jar包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.30</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+        
+        
+		<dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.9.3</version>
+		</dependency>
+        
+		<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+		<dependency>
+		    <groupId>commons-collections</groupId>
+		    <artifactId>commons-collections</artifactId>
+		    <version>3.2.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>${log4j.version}</version>
+		</dependency>
+                
+		<dependency>
+		    <groupId>net.sf.json-lib</groupId>
+		    <artifactId>json-lib</artifactId>
+		    <version>2.4</version>
+		    <!-- 该jar有jdk13和jdk15两个版本 -->
+		    <classifier>jdk15</classifier><!--指定jdk版本-->
+		</dependency>
+		<!-- JSONArray用到 -->
+		<dependency>
+		    <groupId>net.sf.ezmorph</groupId>
+		    <artifactId>ezmorph</artifactId>
+		    <version>1.0.6</version>
+		</dependency>
+        
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.12</version>
+		    <scope>test</scope>
+		</dependency>
+        
+    </dependencies>
+  
+  <build>
+    <plugins>
+	 <plugin>  
+		<groupId>org.apache.maven.plugins</groupId>  
+		<artifactId>maven-compiler-plugin</artifactId>  
+		<version>3.0</version>  
+	    <configuration>  
+	        <source>1.7</source>  
+	        <target>1.7</target>  
+	    </configuration>  
+		</plugin> 
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <version>3.0</version>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
